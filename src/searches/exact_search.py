@@ -1,6 +1,3 @@
-from interface import get_term
-
-
 def count_exact_matches(term, df):
     """
     :param term: exact term to find in the data

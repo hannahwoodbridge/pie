@@ -17,5 +17,3 @@ def excel_to_df(file_name):
                                  ignore_index=True)
 
     return data_df
-
-excel_to_df('ExempleCROPS.xlsx')

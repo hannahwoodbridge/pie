@@ -1,18 +1,19 @@
 import sys, os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import config
-from src.processing.preprocessing import excel_to_df
+from src.processing.preprocessing import preprocess
 from src.searches.exact_search import find_exact_matches, count_exact_matches
-# from src.searches.classification import classify
 
 
-def main():
+def main_CROPS():
     file_name = config.CROPS['file_name']
-    data_df = excel_to_df(file_name)
+    processed_df = preprocess(file_name)
+
     term = sys.argv[1]
-    match_df = find_exact_matches(term, data_df)
+
+    match_df = find_exact_matches(term, processed_df)
     print(count_exact_matches(term, match_df), match_df)
 
 
 if __name__ == '__main__':
-    main()
+    main_CROPS()

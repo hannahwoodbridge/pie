@@ -1,19 +1,13 @@
-import pandas as pd
+from .utils import excel_to_df, remove_accents
 
 
-def excel_to_df(file_name):
+def preprocess(file_name):
     """
-    Imports excel sheets for one data source into one DataFrame
-    :param data_source: name of data source to use (in config.py)
-    :return: single DataFrame of excel data
+    Does preprocessing of the file to search (accent removal)
+    :param file_name:
+    :return: preprocessed DataFrame
     """
-    file_path = f"./data/{file_name}"
-    xlsx = pd.ExcelFile(file_path)
-    sheet_names = xlsx.sheet_names
+    raw_df = excel_to_df(file_name)
+    clean_df = remove_accents(raw_df, "COMMENTAIRE")
 
-    data_df = pd.DataFrame()
-    for sheet in sheet_names:
-        data_df = data_df.append(pd.read_excel(file_path, sheet_name=sheet),
-                                 ignore_index=True)
-
-    return data_df
+    return clean_df

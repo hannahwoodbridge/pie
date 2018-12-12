@@ -13,7 +13,7 @@ def main():
     term = sys.argv[1]
     match_df = find_exact_matches(term, data_df)
     df_to_excel(match_df,term)
-    print(count_exact_matches(term, match_df), match_df)
+    print(f"exact matches found: {count_exact_matches(term, match_df)}")
     print("Le fichier output est à l'adresse ./output")
 
 

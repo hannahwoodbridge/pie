@@ -7,7 +7,7 @@ def df_to_excel(df,term):
     :param df: DataFrame of rows
     """
     
-    file_path = f"./output/output_{term}.xlsx
+    file_path = f"./output/output_{term}.xlsx"
     writer = pd.ExcelWriter(file_path, engine='xlsxwriter')
     df.to_excel(writer, term)
     writer.save()

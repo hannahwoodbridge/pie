@@ -1,4 +1,5 @@
 import sys, os
+from unidecode import unidecode
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import config
 from src.processing.preprocessing import preprocess
@@ -9,8 +10,7 @@ def main_CROPS():
     file_name = config.CROPS['file_name']
     processed_df = preprocess(file_name)
 
-    term = sys.argv[1].lower()
-    print(term)
+    term = unidecode(sys.argv[1].lower())
 
     match_df = find_exact_matches(term, processed_df)
     print(count_exact_matches(term, match_df), match_df)

@@ -1,4 +1,4 @@
-from .utils import excel_to_df, remove_accents
+from .utils import excel_to_df, remove_accents, remove_caps
 
 
 def preprocess(file_name):
@@ -8,6 +8,7 @@ def preprocess(file_name):
     :return: preprocessed DataFrame
     """
     raw_df = excel_to_df(file_name)
-    clean_df = remove_accents(raw_df, "COMMENTAIRE")
+    lower_df = remove_caps(raw_df, "COMMENTAIRE")
+    clean_df = remove_accents(lower_df, "COMMENTAIRE")
 
     return clean_df

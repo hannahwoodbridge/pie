@@ -30,3 +30,15 @@ def remove_accents(df, column):
     df[column] = df[column].map(lambda x: unidecode(x))
 
     return df
+
+
+def remove_caps(df, column):
+    """
+    Removes accents of a column of a DataFrame
+    :param df: DataFrame
+    :param column: name of the column
+    :return: the DataFrame
+    """
+    df[column] = df[column].str.lower()
+
+    return df

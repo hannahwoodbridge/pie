@@ -15,4 +15,4 @@ def find_exact_matches(term, df):
     :return: DataFrame of rows where an exact match is found
     """
 
-    return df[df.COMMENTAIRE.str.contains(term)]
+    return df[df.COMMENTAIRE.str.contains(term, case=False)]

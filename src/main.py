@@ -9,7 +9,8 @@ def main_CROPS():
     file_name = config.CROPS['file_name']
     processed_df = preprocess(file_name)
 
-    term = sys.argv[1]
+    term = sys.argv[1].lower()
+    print(term)
 
     match_df = find_exact_matches(term, processed_df)
     print(count_exact_matches(term, match_df), match_df)

@@ -10,4 +10,7 @@ Then run main.py with arguments the term to search for:
 
     python main.py term
 
-This will run an exact search in ExempleCROPS.xlsx for the term entered. Returns the rows containing occurences of the term, and the total number of occurences. 
+
+This will run an exact search in ExempleCROPS.xlsx for the term entered. Returns the rows containing occurrences of the term, and the total number of occurrences.
+
+An working example you can search for is forêt.

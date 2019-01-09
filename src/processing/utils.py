@@ -46,11 +46,11 @@ def remove_caps(df, column):
 
 def get_acronym_dict():
     """
-    Fetches the acronym dictionary from the helpers folder and formats it
+    Fetches the acronym dictionary from the aux file and formats it
     :return: a dictionary for converting acronyms to full terms
     """
     file_name = "dict_acronymes.xlsx"
-    file_type = "helpers"
+    file_type = "aux"
     df = excel_to_df(file_name, file_type)
     df = df[['Acronym', 'Term']].dropna()
     acronym_dict = df.set_index('Acronym').T.to_dict('records')[0]

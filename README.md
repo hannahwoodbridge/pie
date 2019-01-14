@@ -9,7 +9,10 @@ Then run main.py with arguments the term to search for:
     cd src
 
     python main.py term
-
+    
+    OPTIONS :
+    
+    -c to impose case sensitiveness (ignored by default)
 
 This will run an exact search in ExempleCROPS.xlsx for the term entered. Returns the rows containing occurrences of the term, and the total number of occurrences.
 

@@ -15,7 +15,7 @@ def preprocess(file_name):
     """
     df = excel_to_df(file_name, "data")
     df = replace_acronyms_df(df, "COMMENTAIRE")
-    df = remove_caps(df, "COMMENTAIRE")
+    #df = remove_caps(df, "COMMENTAIRE")
     df = remove_accents(df, "COMMENTAIRE")
 
     return df

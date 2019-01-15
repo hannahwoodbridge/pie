@@ -9,10 +9,10 @@ import config
 
 def get_split_data(df, column, type):
     df = shuffle(df)
-    size = df.COMMENTAIRE.count()
+    size = df.comment.count()
 
     if column == "x":
-        series = df.COMMENTAIRE
+        series = df.comment
     elif column == "y":
         series = df.Categorie
     else:

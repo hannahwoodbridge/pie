@@ -5,7 +5,8 @@ from unidecode import unidecode
 def excel_to_df(file_name, file_type):
     """
     Imports excel sheets for one data source into one DataFrame
-    :param data_source: name of data source to use (in config.py)
+    :param file_name: name of data source to use (in config.py)
+    :param file_type: specify the type of file (helpers, data)
     :return: single DataFrame of excel data
     """
     file_path = f"./{file_type}/{file_name}"
@@ -16,7 +17,12 @@ def excel_to_df(file_name, file_type):
     for sheet in sheet_names:
         data_df = data_df.append(pd.read_excel(file_path, sheet_name=sheet),
                                  ignore_index=True)
-
+    columns = ["id",
+               "datetime",
+               "localisation",
+               "comment"]
+    data_df.set_axis(columns, axis='columns', inplace=True)
+    print(data_df)
     return data_df
 
 
@@ -81,3 +87,15 @@ def replace_acronyms_df(df, column):
     df[column] = df[column].map(lambda x: replace_acronyms(x, acronym_dict))
 
     return df
+
+
+def get_material_dict():
+    """
+    """
+    file_name = "dict_materiel.xlsx"
+    file_type = "helpers"
+    df = excel_to_df(file_name, file_type)
+    df = df[['Acronym', 'Term']].dropna()
+    acronym_dict = df.set_index('Acronym').T.to_dict('records')[0]
+
+    return acronym_dict

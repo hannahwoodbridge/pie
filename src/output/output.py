@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def write_output(results, term, input_file):
     """
     Exports data frame results as Excel sheet
@@ -8,8 +9,7 @@ def write_output(results, term, input_file):
     :param input_file: file being searched
     :return: Excel sheet of the matched rows
     """
-
-    file_path = f"./output/output_{term}_{input_file}.xlsx"
+    file_path = f"./output/output_{term}_{input_file}"
     writer = pd.ExcelWriter(file_path, engine='xlsxwriter')
     results.to_excel(writer, term)
     writer.save()

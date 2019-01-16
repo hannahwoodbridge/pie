@@ -1,10 +1,28 @@
 import tkinter as tk 
 import tkcalendar
 from tkinter import simpledialog
-
+from PIL import Image, ImageTk
 
 class MainWindow(tk.Frame):
-    def __init__(self, master, OPTIONS):
+    """Displays the data interface in a more good-looking way"""
+    def __init__(self, master, root, OPTIONS):
+        #Image frame
+        self.frame1 = tk.Frame(master)
+        self.frame1.grid(row=1, column=1)
+        self.image = ImageFrame(self.frame1)
+        
+        #Data frame
+        self.frame2 = tk.Frame(master)
+        self.frame2.grid(row=1, column=2)
+        self.window = DataWindow(self.frame2, root,OPTIONS)
+        
+        master.grid()
+        
+
+class DataWindow(tk.Frame):
+    """Interface to select all the inputs"""
+    def __init__(self, master, root, OPTIONS):
+        self.root=root
         self.master=master
         self.label = tk.Label(master, 
                               text="Enter a term to search in the database")
@@ -24,7 +42,9 @@ class MainWindow(tk.Frame):
         self.search_list = tk.OptionMenu(*args)
         self.search_list.pack()
         
-        #Creation of selection dates       
+        #Creation of selection dates  
+        self.date1=""
+        self.date2=""
         button = tk.Button(master, text="Selectionnez la premiere date", 
                            command=self.onclick_date1)
         button.pack()
@@ -38,7 +58,7 @@ class MainWindow(tk.Frame):
         frame.pack()
         self.OK = tk.Button(frame, text="OK", command=self.get_search)
         self.OK.pack(side=tk.LEFT)
-        self.cancel=tk.Button(frame, text="Cancel", command=master.destroy)
+        self.cancel=tk.Button(frame, text="Cancel", command=root.destroy)
         self.cancel.pack(side=tk.RIGHT)
         
         
@@ -54,13 +74,19 @@ class MainWindow(tk.Frame):
             raise ValueError('Please enter a term to be searched in database')
         if self.search_type=="Select type of search":
             raise ValueError('Please select a type of search')
-        self.master.destroy()
+        self.root.destroy()
         
     def onclick_date1 (self):
+        """
+        Class method to update the date selected in the calendar box
+        """
         cd = CalendarDialog(self.master)
         self.date1=cd.result
         
     def onclick_date2 (self):
+        """
+        Class method to update the date selected in the calendar box
+        """
         cd = CalendarDialog(self.master)
         self.date2=cd.result
         
@@ -74,6 +100,19 @@ class CalendarDialog(simpledialog.Dialog):
     def apply(self):
         self.result = self.calendar.get_date()      
    
+
+
+class ImageFrame(tk.Frame):
+    """Frame displaying the Logo de l'Armée de Terre"""
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.original = Image.open('./data/logo_ADT.png')
+        resized = self.original.resize((600, 468), Image.ANTIALIAS)
+        self.image = ImageTk.PhotoImage(resized) # Keep a reference, prevent GC
+        imagelabel = tk.Label(self, image = self.image)
+        imagelabel.grid(row=1,column=1)
+        self.grid()
+        
 
 def get_search_data():
     """
@@ -91,10 +130,10 @@ def get_search_data():
     # Creation of window interface
     root = tk.Tk()
     root.title("Search")
-    window = MainWindow(root,OPTIONS)
+    I = MainWindow(root,root,OPTIONS)
     root.mainloop()
     
-    return window.term, window.search_type, window.date1, window.date2
+    return I.window.term, I.window.search_type, I.window.date1, I.window.date2
 
 ########## Displaying results #########
        

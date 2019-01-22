@@ -10,7 +10,7 @@ if __name__ == '__main__':
     arguments = get_arguments()
 
     file_name = arguments.file_name
-    if not file_name: 
+    if not file_name:
         file_name = config.DEFAULT['file_name']
         print(
             f"No file specified, using default file "
@@ -25,4 +25,4 @@ if __name__ == '__main__':
             quit()
 
         case_sensitive = arguments.cs
-        exact_search("ExempleCROPS_1.xlsx", term, case_sensitive)
+        exact_search(file_name, term, case_sensitive)

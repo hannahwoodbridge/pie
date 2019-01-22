@@ -31,9 +31,8 @@ def find_exact_matches(term, df, case_sensitive=False):
     :return: DataFrame of rows where an exact match is found
     """
     results = df[
-        df.comment.str.contains(term,
-                                    case=case_sensitive)
-    ].reset_index()
+        df.comment.str.contains(term, case=case_sensitive)
+    ].reset_index(drop=True)
 
     if not results.empty:
         if case_sensitive:

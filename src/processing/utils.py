@@ -22,7 +22,7 @@ def excel_to_df(file_name, file_type):
                "localisation",
                "comment"]
     data_df.set_axis(columns, axis='columns', inplace=True)
-    print(data_df)
+
     return data_df
 
 
